@@ -1,0 +1,98 @@
+Creating a network topology using Cisco Packet Tracer. : YES
+Hierarchical Network Design. : YES CAMPUS NETWORK
+Connecting Networking devices with Correct cabling. : YES 
+Creating VLANs and assigning ports VLAN numbers. : YES. CREATED ON DISTRIBUTION SWITCH MAIN CAMPUS VLAN 1-8, ON EACH ACCESS PORT CREATED ITS OWN VLAN.
+
+
+Configuring Inter-VLAN Routing (Router on a stick).
+ENABLED TRUNKING FROM SW TO ROUTER: trunk encapsultion dot1q
+
+
+
+
+
+Configuring DHCP Server (Router as the DHCP Server).
+Configuring SSH for secure Remote access.
+Configuring RIPv2 as the routing protocol.
+Configuring switchport security or Port-Security on the switches.
+Host Device Configurations.
+Test and Verifying Network Communication.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Subnetting and IP Addressing.
+/24 256 USABLE
+
+MAIN CAMPUS NETWORK
+10.10.10.0/30 POINT TO POINT 2 HOST
+
+CLOUD
+20.0.0.0/30
+
+EXTERNAL RESERVE
+10.10.10.4
+
+
+
+
+BUILDING A
+VLAN 10 192.169.1.0
+VLAN 20 192.168.2.0
+VLAN 30 192.168.3.0
+VLAN 40 192.168.4.0
+
+BUILDING B
+192.168.5.0
+192.168.6.0
+
+BUILDING C
+192.168.7.0
+192.168.8.0
+
+EXTERNAL BUILDING
+Student building 192.168.9.0
+Staaff building 192.168.10.0
+
+
+
+
+
+
+
+
+
+VLAN SETUP: 
+BUILDING A:
+VLAN  10 ADMIN
+VLAN 20 HR
+VLAN 30 FINANCE
+VLAN 40 BUSINESS
+
+BUILDING B:
+VLAN 50 ENGERRING, COMPUTING  
+VLAN 60 ART DESIGN
+
+BUILDING C:
+VLAN 70 STUDENT LAB
+VLAN 80 IT ROOM
+
+EXTERNAL BUILDING
+VLAN 90 STUDENT
+VLAN 100 STAFF
