@@ -1,0 +1,62 @@
+# Enterprise Network Design: HQ & Branch Office
+**Project Focus:** Cisco Networking Best Practices (OSPF, NAT, EtherChannel, STP)
+
+---
+
+## 🚀 Project Overview
+This project demonstrates a multi-site hierarchical network architecture designed for high availability and scalability. It features a fully redundant Core layer, segmented VLANs for departments, and secure internet edge services.
+
+## 🛠️ Technical Implementation List
+
+### 1. Layer 2: Switching & Redundancy
+* **VLAN Segmentation:**
+    * **VLAN 10:** Floor 10/First Floor Users.
+    * **VLAN 20:** Floor 2/Second Floor Users.
+    * **VLAN 99:** Management & Server Farm.
+* **EtherChannel (LACP/PAgP):**
+    * Configured **Layer 3 EtherChannels** between Cores and **Layer 2 EtherChannels** between Distribution and Access layers to increase bandwidth and prevent single points of failure.
+* **Spanning Tree Protocol (STP):**
+    * **Root Bridge:** Core Switch manually set to Priority `4096`.
+    * **PortFast:** Enabled on all end-device ports for instant connectivity.
+    * **Root Guard:** Applied to protect the topology from unauthorized bridge elections.
+
+### 2. Layer 3: Routing & High Availability
+* **OSPF (Open Shortest Path First):**
+    * Single-area (Area 0) backbone used for dynamic route advertisement via LSAs.
+    * **Passive Interfaces:** Configured on user VLANs to enhance security.
+* **Redundancy & Failover:**
+    * **HSRP (Hot Standby Router Protocol):** Implemented at the Branch for gateway redundancy.
+    * **Floating Static Route:** Configured with an AD of `210` to act as a backup for the OSPF process.
+* **Default Route:** Injected via `default-information originate` from the Border Router (Router 8).
+
+### 3. Edge Services & Security
+* **NAT/PAT (Network Address Translation):**
+    * Used **PAT Overload** on the Serial interface to allow private internal subnets (192.168.x.x and 10.0.x.x) to reach the Internet.
+* **Access Control Lists (ACL):**
+    * Standard ACLs used to define interesting traffic for NAT.
+* **DHCP Design:**
+    * **IP-Helper Address:** Configured on all SVIs to relay requests to a centralized DHCP server in the Management VLAN.
+
+---
+
+## 📊 IP Address Management (IPAM)
+
+| Location | Purpose | Subnet | Gateway | VLAN |
+| :--- | :--- | :--- | :--- | :--- |
+| **HQ** | Floor 10 | 192.168.10.0/24 | .1 | 10 |
+| **HQ** | Floor 20 | 192.168.20.0/24 | .1 | 20 |
+| **HQ** | Management | 192.168.99.0/24 | .1 | 99 |
+| **Branch** | Floor 10 | 10.0.10.0/24 | .1 | 10 |
+| **Branch** | Floor 20 | 10.0.20.0/24 | .1 | 20 |
+
+---
+
+## 🔍 Verification & Troubleshooting
+The following commands were used to validate the infrastructure:
+- `show ip ospf neighbor` (Routing Adjacency)
+- `show ip nat translations` (Internet Connectivity)
+- `show standby brief` (HSRP Status)
+- `show etherchannel summary` (Link Redundancy)
+
+---
+**Author:** Joysha García  
